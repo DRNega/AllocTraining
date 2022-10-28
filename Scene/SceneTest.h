@@ -22,8 +22,10 @@ private:
 	int			m_hPlayer;
 	int			m_hEnemy;
 
-	ObjectPlayer	m_player;
-	std::vector<ObjectEnemy>	m_enemy;
+	ObjectPlayer*	m_pPlayer;
+
+
+	std::vector<ObjectEnemy*>	m_pEnemy;
 
 	// “G‚Ì¶¬
 	int			m_enemyInterval;

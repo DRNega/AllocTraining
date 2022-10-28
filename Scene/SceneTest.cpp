@@ -17,15 +17,24 @@ namespace
 SceneTest::SceneTest():
 	m_hPlayer(-1),
 	m_hEnemy(-1),
-	m_player(),
-	m_enemy(kEnemyMax),
+	m_pPlayer(nullptr),
+	m_pEnemy(kEnemyMax, nullptr),
 	m_enemyInterval(0)
 {
-
+	m_pPlayer = new ObjectPlayer;
+	for (auto& pEnemy : m_pEnemy)
+	{
+		pEnemy = new ObjectEnemy;
+	}
 }
 SceneTest::~SceneTest()
 {
-
+	delete m_pPlayer;
+	for (auto& pEnemy : m_pEnemy)
+	{
+		delete pEnemy;
+		pEnemy = nullptr;
+	}
 }
 
 void SceneTest::init()
@@ -33,12 +42,12 @@ void SceneTest::init()
 	m_hPlayer = LoadGraph(kPlayerFilename);
 	m_hEnemy = LoadGraph(kEnemyFilename);
 
-	m_player.init();
-	m_player.setHandle(m_hPlayer);
-	for (auto& enemy : m_enemy)
+	m_pPlayer->init();
+	m_pPlayer->setHandle(m_hPlayer);
+	for (auto& pEnemy : m_pEnemy)
 	{
-		enemy.init();
-		enemy.setHandle(m_hEnemy);
+		pEnemy->init();
+		pEnemy->setHandle(m_hEnemy);
 	}
 
 	m_enemyInterval = 0;
@@ -52,23 +61,23 @@ void SceneTest::end()
 
 SceneBase* SceneTest::update()
 {
-	m_player.update();
-	for (auto& enemy : m_enemy)
+	m_pPlayer->update();
+	for (auto& pEnemy : m_pEnemy)
 	{
-		enemy.update();
+		pEnemy->update();
 	}
 
 	m_enemyInterval++;
 	if (m_enemyInterval >= kEnemyInterval)
 	{
 		// Žg—p‚³‚ê‚Ä‚¢‚È‚¢“G‚ð’T‚µ‚Ä‚»‚ê‚ðŽg‚¤
-		for (auto& enemy : m_enemy)
+		for (auto& pEnemy : m_pEnemy)
 		{
-			if (enemy.isExist())	continue;
+			if (pEnemy->isExist())	continue;
 
-			enemy.setExist(true);
+			pEnemy->setExist(true);
 			Vec2 pos{Game::kScreenWidth+16, static_cast<float>(GetRand(Game::kScreenHeight))};
-			enemy.setPos(pos);
+			pEnemy->setPos(pos);
 			break;
 		}
 
@@ -79,10 +88,10 @@ SceneBase* SceneTest::update()
 
 void SceneTest::draw()
 {
-	m_player.draw();
-	for (auto& enemy : m_enemy)
+	m_pPlayer->draw();
+	for (auto& pEnemy : m_pEnemy)
 	{
-		enemy.draw();
+		pEnemy->draw();
 	}
 }
 
