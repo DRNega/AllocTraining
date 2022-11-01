@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "game.h"
 #include "SceneTest.h"
+#include "ObjectEnemyDir.h"
 
 namespace
 {
@@ -32,8 +33,12 @@ SceneTest::~SceneTest()
 	delete m_pPlayer;
 	for (auto& pEnemy : m_pEnemy)
 	{
-		delete pEnemy;
-		pEnemy = nullptr;
+		if (!pEnemy)
+		{
+			delete pEnemy;
+			pEnemy = nullptr;
+		}
+
 	}
 }
 
@@ -64,6 +69,10 @@ SceneBase* SceneTest::update()
 	m_pPlayer->update();
 	for (auto& pEnemy : m_pEnemy)
 	{
+		if (!pEnemy)
+		{
+			continue;
+		}
 		pEnemy->update();
 	}
 
@@ -73,10 +82,20 @@ SceneBase* SceneTest::update()
 		// égópÇ≥ÇÍÇƒÇ¢Ç»Ç¢ìGÇíTÇµÇƒÇªÇÍÇégÇ§
 		for (auto& pEnemy : m_pEnemy)
 		{
-			if (pEnemy->isExist())	continue;
+			// nullptrÇíTÇµÇƒêVÇµÇ¢ãÖÇê∂ê¨Ç∑ÇÈ
+			if (pEnemy)
+			{
+				continue;
+			}
 
+			pEnemy = new ObjectEnemy;
+
+			pEnemy->init();
+			pEnemy->setHandle(m_hEnemy);
 			pEnemy->setExist(true);
-			Vec2 pos{Game::kScreenWidth+16, static_cast<float>(GetRand(Game::kScreenHeight))};
+			//pEnemy->setDir(30.0f);
+			Vec2 pos{ Game::kScreenWidth + 16, static_cast<float>(GetRand(Game::kScreenHeight)) };
+		//	Vec2 pos{ Game::kScreenWidth / 2, Game::kScreenHeight / 2 };
 			pEnemy->setPos(pos);
 			break;
 		}
@@ -91,7 +110,19 @@ void SceneTest::draw()
 	m_pPlayer->draw();
 	for (auto& pEnemy : m_pEnemy)
 	{
-		pEnemy->draw();
+		if (pEnemy)  pEnemy->draw();
 	}
+
+	int num = 0;
+	for (auto& pEnemy : m_pEnemy)
+	{
+		if ((pEnemy) && (pEnemy->isExist()))
+		{
+				num++;
+		}
+
+		
+	}
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "ìGÇÃêî:%d", num);
 }
 

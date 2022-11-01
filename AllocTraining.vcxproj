@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ObjectEnemyDir.cpp" />
     <ClCompile Include="Object\ObjectEnemy.cpp" />
     <ClCompile Include="Object\ObjectPlayer.cpp" />
     <ClCompile Include="Scene\SceneBase.cpp" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
+    <ClInclude Include="ObjectEnemyDir.h" />
     <ClInclude Include="Object\ObjectEnemy.h" />
     <ClInclude Include="Object\ObjectPlayer.h" />
     <ClInclude Include="Scene\SceneBase.h" />
