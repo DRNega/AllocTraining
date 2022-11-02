@@ -29,4 +29,5 @@ private:
 
 	// “G‚Ì¶¬
 	int			m_enemyInterval;
+	int			m_enemyCreateNum;
 };

@@ -15,18 +15,16 @@ namespace
 	constexpr int kEnemyInterval = 30;
 }
 
-SceneTest::SceneTest():
+SceneTest::SceneTest() :
 	m_hPlayer(-1),
 	m_hEnemy(-1),
 	m_pPlayer(nullptr),
 	m_pEnemy(kEnemyMax, nullptr),
-	m_enemyInterval(0)
+	m_enemyInterval(0),
+	m_enemyCreateNum(0)
 {
 	m_pPlayer = new ObjectPlayer;
-	for (auto& pEnemy : m_pEnemy)
-	{
-		pEnemy = new ObjectEnemy;
-	}
+	
 }
 SceneTest::~SceneTest()
 {
@@ -88,6 +86,20 @@ SceneBase* SceneTest::update()
 				continue;
 			}
 
+			switch (GetRand(2))
+			{
+			case 0:
+				pEnemy = new ObjectEnemy;
+				break;
+			case 1:
+				pEnemy = new ObjectEnemyDir;
+				break;
+			case 2:
+			default:
+				pEnemy = new ObjectEnemy;
+				break;
+			}
+
 			pEnemy = new ObjectEnemy;
 
 			pEnemy->init();
@@ -95,7 +107,7 @@ SceneBase* SceneTest::update()
 			pEnemy->setExist(true);
 			//pEnemy->setDir(30.0f);
 			Vec2 pos{ Game::kScreenWidth + 16, static_cast<float>(GetRand(Game::kScreenHeight)) };
-		//	Vec2 pos{ Game::kScreenWidth / 2, Game::kScreenHeight / 2 };
+			//	Vec2 pos{ Game::kScreenWidth / 2, Game::kScreenHeight / 2 };
 			pEnemy->setPos(pos);
 			break;
 		}
@@ -113,16 +125,5 @@ void SceneTest::draw()
 		if (pEnemy)  pEnemy->draw();
 	}
 
-	int num = 0;
-	for (auto& pEnemy : m_pEnemy)
-	{
-		if ((pEnemy) && (pEnemy->isExist()))
-		{
-				num++;
-		}
-
-		
-	}
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "“G‚Ì”:%d", num);
 }
 

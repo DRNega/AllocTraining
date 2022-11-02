@@ -18,7 +18,4 @@ public:
 private:
 	// ”ò‚ñ‚Å‚¢‚­•ûŒü
 	Vec2	m_vec;
-
-
-
 };
