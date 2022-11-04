@@ -19,15 +19,14 @@ public:
 	virtual void draw() override;
 
 private:
+	// グラフィックハンドル
 	int			m_hPlayer;
 	int			m_hEnemy;
+	int			m_hArrow;
 
-	ObjectPlayer*	m_pPlayer;
-
-
+	ObjectPlayer* m_pPlayer;
 	std::vector<ObjectEnemy*>	m_pEnemy;
 
 	// 敵の生成
 	int			m_enemyInterval;
-	int			m_enemyCreateNum;
 };

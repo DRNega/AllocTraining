@@ -10,6 +10,8 @@ namespace
 
 ObjectEnemy::ObjectEnemy() :
 	m_hGraph(-1),
+	m_rotation(0.0f),
+	m_rotateSpeed(-0.1f),
 	m_isExist(false),
 	m_pos()
 {
@@ -34,6 +36,7 @@ void ObjectEnemy::end()
 void ObjectEnemy::update()
 {
 	if (!m_isExist)	return;
+	m_rotation += m_rotateSpeed;
 	m_pos.x -= kSpeed;
 	if (m_pos.x <= -16.0f)
 	{

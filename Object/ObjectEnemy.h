@@ -27,6 +27,12 @@ public:
 protected:
 	// グラフィックハンドル
 	int		m_hGraph;
+
+	// 回転角度
+	float	m_rotation;
+	// 回転速度
+	float	m_rotateSpeed;
+
 	// 存在するか
 	bool	m_isExist;
 	// 左上座標

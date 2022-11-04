@@ -140,7 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ObjectEnemyArrow.cpp" />
     <ClCompile Include="ObjectEnemyDir.cpp" />
+    <ClCompile Include="ObjectEnemyThrow.cpp" />
     <ClCompile Include="Object\ObjectEnemy.cpp" />
     <ClCompile Include="Object\ObjectPlayer.cpp" />
     <ClCompile Include="Scene\SceneBase.cpp" />
@@ -152,7 +154,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
+    <ClInclude Include="ObjectEnemyArrow.h" />
     <ClInclude Include="ObjectEnemyDir.h" />
+    <ClInclude Include="ObjectEnemyThrow.h" />
     <ClInclude Include="Object\ObjectEnemy.h" />
     <ClInclude Include="Object\ObjectPlayer.h" />
     <ClInclude Include="Scene\SceneBase.h" />
